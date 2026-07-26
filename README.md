@@ -114,7 +114,7 @@ Farmacopea Herbolaria de los Estados Unidos Mexicanos.
 
 
 
-&#x20;      git clone https://github.com/TU\_USUARIO/farmaknow.git
+git clone https://github.com/jgodinezaviles/farmaknow.git
 
 &#x20;      cd farmaknow
 
@@ -199,5 +199,4 @@ catalogo disponible (no responde fuera de su dominio).
 Ver docs/politica\_uso\_alcance.md. FarmaKnow es un proyecto educativo; la informacion
 
 es orientativa y no sustituye la valoracion de un profesional de la salud.
-
 
