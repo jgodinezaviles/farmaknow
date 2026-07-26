@@ -1,4 +1,4 @@
-\# FarmaKnow
+﻿\# FarmaKnow
 
 
 
@@ -199,4 +199,5 @@ catalogo disponible (no responde fuera de su dominio).
 Ver docs/politica\_uso\_alcance.md. FarmaKnow es un proyecto educativo; la informacion
 
 es orientativa y no sustituye la valoracion de un profesional de la salud.
+
 
