@@ -231,8 +231,8 @@ Servicios utilizados:
 \- Security Groups (firewall: SSH, HTTP, HTTPS, puerto 8501 para Streamlit)
 
 
-
-!\[FarmaKnow en ejecucion](docs/captura\_deploy.png)
+Puedes encontrar la captura de la ejecucion en la nube en:
+docs/captura_deploy.png
 
 
 
