@@ -1,246 +1,484 @@
-﻿\# FarmaKnow
+<div align="center">
 
+<img src="docs/logo.png" alt="FarmaKnow" width="180">
 
+# 💊 FarmaKnow
 
-Asistente inteligente de medicamentos de venta libre (OTC), herbolaria y suplementos en Mexico.
+### Asistente inteligente para la orientación sobre medicamentos de venta libre en México
 
-Proyecto del challenge \*\*Alura Agente\*\* del programa \*\*Oracle Next Education (ONE)\*\*.
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge\&logo=python\&logoColor=white)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?style=for-the-badge\&logo=streamlit\&logoColor=white)](https://streamlit.io/)
+[![Cohere](https://img.shields.io/badge/Cohere-AI-39594D?style=for-the-badge)](https://cohere.com/)
+[![ChromaDB](https://img.shields.io/badge/ChromaDB-Vector_DB-7B61FF?style=for-the-badge)](https://www.trychroma.com/)
+[![AWS](https://img.shields.io/badge/AWS-EC2-FF9900?style=for-the-badge\&logo=amazonwebservices\&logoColor=white)](https://aws.amazon.com/ec2/)
 
+Proyecto desarrollado para el challenge **Alura Agente** del programa
+**Oracle Next Education, ONE**.
 
+[Ver demostración](http://18.206.184.187:8501) · [Reportar un problema](https://github.com/jgodinezaviles/farmaknow/issues)
 
-\## Descripcion
+</div>
 
+---
 
+## 📑 Contenido
 
-FarmaKnow es un agente de IA basado en RAG (Retrieval-Augmented Generation) que orienta a las
+* [Descripción](#-descripción)
+* [Características principales](#-características-principales)
+* [Seguridad y alcance](#-seguridad-y-alcance)
+* [Arquitectura](#-arquitectura)
+* [Tecnologías](#-tecnologías)
+* [Catálogo de conocimiento](#-catálogo-de-conocimiento)
+* [Instalación local](#-instalación-local)
+* [Ejemplos de uso](#-ejemplos-de-uso)
+* [Despliegue](#-despliegue)
+* [Estructura del proyecto](#-estructura-del-proyecto)
+* [Política de uso](#-política-de-uso)
 
-personas sobre opciones de venta libre para sintomas comunes. El usuario describe su malestar
+---
 
-(por seleccion guiada o texto libre) y el agente responde \*\*unicamente\*\* con base en un catalogo
+## 🔎 Descripción
 
-curado de 161 registros, citando producto, principio activo, presentacion y contraindicaciones.
+**FarmaKnow** es un agente de inteligencia artificial basado en una arquitectura **RAG**, Retrieval-Augmented Generation, diseñado para orientar a las personas sobre opciones de venta libre relacionadas con síntomas comunes.
 
+El usuario puede describir su malestar mediante una consulta guiada o escribiendo libremente. El sistema analiza la solicitud, busca información relevante dentro de un catálogo curado y genera una respuesta basada exclusivamente en los registros recuperados.
 
+El catálogo contiene **161 registros** de:
 
-Caracteristicas de seguridad:
+* Medicamentos de venta libre, OTC.
+* Productos de herbolaria.
+* Vitaminas.
+* Suplementos alimenticios.
 
+Cada respuesta puede incluir:
 
+* Nombre comercial.
+* Principio activo.
+* Presentación.
+* Contraindicaciones relevantes.
+* Advertencias de seguridad.
+* Recomendación de consulta profesional.
 
-\- Nunca sugiere medicamentos de receta ni dosis especificas
+> [!IMPORTANT]
+> FarmaKnow es un proyecto educativo y no sustituye el diagnóstico, tratamiento ni valoración de un médico o profesional de la salud.
 
-\- Deteccion de sintomas de alerta (advertencia\_seria): ante posibles emergencias
+---
 
-&#x20; (dolor de pecho, sangrados, dificultad respiratoria) prioriza recomendar atencion
+## ✨ Características principales
 
-&#x20; medica inmediata en lugar de productos
+| Función                     | Descripción                                                                                           |
+| --------------------------- | ----------------------------------------------------------------------------------------------------- |
+| 🧭 Consulta guiada          | Permite seleccionar síntomas mediante una interfaz estructurada.                                      |
+| 💬 Chat libre               | Interpreta preguntas escritas en lenguaje natural.                                                    |
+| 🧠 Búsqueda semántica       | Recupera información relacionada aunque la consulta no utilice exactamente las palabras del catálogo. |
+| 📚 Respuestas fundamentadas | Genera respuestas utilizando únicamente el contenido recuperado.                                      |
+| 🚨 Detección de alertas     | Identifica síntomas que podrían requerir atención médica inmediata.                                   |
+| 🔗 Fuentes visibles         | Muestra los productos y registros utilizados para construir la respuesta.                             |
+| 🛑 Control de alucinaciones | Indica cuando no existe información suficiente, en lugar de inventarla.                               |
 
-\- Siempre recomienda consultar a un profesional de la salud
+---
 
-\- Si la informacion no esta en el catalogo, lo dice explicitamente en vez de inventar
+## 🛡️ Seguridad y alcance
 
+FarmaKnow fue diseñado con reglas específicas para reducir respuestas potencialmente peligrosas.
 
+### El agente nunca debe
 
-\## Arquitectura
+* Recomendar medicamentos de venta con receta.
+* Proporcionar dosis específicas.
+* Diagnosticar enfermedades.
+* Sustituir la valoración de un profesional.
+* Inventar productos o información ausente del catálogo.
 
+### Detección de síntomas de alerta
 
+Los registros pueden incluir el campo `advertencia_seria`.
 
-&#x20;   Usuario (Streamlit UI)
+Cuando la consulta contiene síntomas como:
 
-&#x20;      |
+* Dolor de pecho.
+* Dificultad para respirar.
+* Sangrado abundante.
+* Pérdida del conocimiento.
+* Reacción alérgica grave.
+* Dolor intenso o repentino.
 
-&#x20;      v
+El agente debe priorizar la recomendación de **atención médica inmediata** y evitar sugerir productos de automedicación.
+
+> [!WARNING]
+> Ante una posible emergencia, se debe contactar a los servicios de emergencia o acudir inmediatamente a una unidad médica.
+
+---
+
+## 🏗️ Arquitectura
+
+```mermaid
+flowchart TD
+    A[Usuario] --> B[Interfaz Streamlit]
+
+    B --> C{Tipo de consulta}
+    C -->|Consulta guiada| D[Construcción de pregunta]
+    C -->|Chat libre| D
+
+    D --> E[Embedding de la consulta]
+    E --> F[Cohere embed-multilingual-v3.0]
 
-&#x20;   Pregunta -> Embedding (Cohere embed-multilingual-v3.0)
+    F --> G[ChromaDB]
+    G --> H[Recuperación de los 4 chunks más relevantes]
 
-&#x20;      |
+    H --> I[Productos y metadatos]
+    I --> J[Prompt con reglas de seguridad]
 
-&#x20;      v
+    J --> K[Cohere command-r7b-12-2024]
+    K --> L[Respuesta fundamentada]
 
-&#x20;   Busqueda semantica (ChromaDB, 162 chunks: 161 catalogo + 1 politica de uso)
+    L --> M{¿Existe una alerta?}
+    M -->|Sí| N[Recomendación de atención médica]
+    M -->|No| O[Orientación sobre opciones OTC]
 
-&#x20;      |
+    N --> P[Respuesta, alerta y fuentes]
+    O --> P
+```
 
-&#x20;      v
+### Flujo de recuperación
 
-&#x20;   Top-4 chunks + metadatos -> Prompt con reglas de seguridad
+```text
+Consulta del usuario
+        │
+        ▼
+Embedding multilingüe
+        │
+        ▼
+Búsqueda semántica en ChromaDB
+        │
+        ▼
+Top 4 fragmentos relevantes
+        │
+        ▼
+Prompt con contexto y reglas de seguridad
+        │
+        ▼
+Generación de respuesta con Cohere
+        │
+        ▼
+Respuesta, bandera de alerta y fuentes
+```
 
-&#x20;      |
+La base vectorial contiene **162 chunks**:
 
-&#x20;      v
+* 161 registros del catálogo.
+* 1 documento con la política de uso y alcance.
 
-&#x20;   Generacion de respuesta (Cohere command-r7b-12-2024)
+---
 
-&#x20;      |
+## 🧰 Tecnologías
 
-&#x20;      v
+| Tecnología    | Uso dentro del proyecto                                |
+| ------------- | ------------------------------------------------------ |
+| **Python**    | Lógica principal del agente y procesamiento de datos.  |
+| **Cohere**    | Generación de embeddings multilingües y respuestas.    |
+| **ChromaDB**  | Almacenamiento y búsqueda dentro de la base vectorial. |
+| **Pandas**    | Limpieza, validación y procesamiento del catálogo.     |
+| **Streamlit** | Desarrollo de la interfaz web interactiva.             |
+| **AWS EC2**   | Alojamiento de la aplicación en la nube.               |
+| **GitHub**    | Control de versiones y documentación del proyecto.     |
 
-&#x20;   Respuesta + bandera de alerta + fuentes citadas
+---
 
+## 📚 Catálogo de conocimiento
 
+El catálogo fue construido utilizando información de referencia relacionada con productos de venta libre, herbolaria y suplementos disponibles en México.
 
-\## Tecnologias
+Entre las fuentes consultadas se encuentran:
 
+* COFEPRIS.
+* PLM.
+* Cuadro Básico y Catálogo de Medicamentos.
+* Consejo de Salubridad General.
+* NOM-086-SSA1.
+* Farmacopea Herbolaria de los Estados Unidos Mexicanos.
 
+Cada registro puede contener campos como:
 
-\- \*\*Python\*\* - logica del agente
+```text
+síntoma
+categoría
+principio activo
+nombre comercial
+presentación
+clasificación de venta
+contraindicaciones clave
+advertencia seria
+fuente
+```
 
-\- \*\*Cohere\*\* - embeddings multilingues y generacion de texto
+---
 
-\- \*\*ChromaDB\*\* - base de datos vectorial local
+## ⚙️ Instalación local
 
-\- \*\*Pandas\*\* - procesamiento del catalogo
+### Requisitos
 
-\- \*\*Streamlit\*\* - interfaz web
+Antes de comenzar, asegúrate de contar con:
 
-\- \*\*AWS EC2\*\* - deploy en la nube
+* Python 3.10 o superior.
+* Git.
+* Una API key de Cohere.
+* `pip` actualizado.
 
+### 1. Clonar el repositorio
 
-
-\## Fuentes del catalogo
-
-
-
-COFEPRIS, PLM, Cuadro Basico y Catalogo de Medicamentos (CSG), NOM-086-SSA1,
-
-Farmacopea Herbolaria de los Estados Unidos Mexicanos.
-
-
-
-\## Instalacion y ejecucion local
-
-
-
-1\. Clonar el repositorio:
-
-
-
+```bash
 git clone https://github.com/jgodinezaviles/farmaknow.git
+cd farmaknow
+```
 
-&#x20;      cd farmaknow
+### 2. Crear un entorno virtual
 
+#### Windows
 
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
 
-2\. Instalar dependencias:
+#### Linux o macOS
 
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
 
+### 3. Instalar las dependencias
 
-&#x20;      pip install -r requirements.txt
+```bash
+pip install -r requirements.txt
+```
 
+### 4. Configurar la API key de Cohere
 
+Obtén una API key desde el panel de Cohere.
 
-3\. Configurar la API key de Cohere (gratuita en dashboard.cohere.com):
+#### Windows PowerShell
 
+```powershell
+setx COHERE_API_KEY "tu_api_key"
+```
 
+Después de ejecutar el comando, abre una nueva terminal.
 
-&#x20;      setx COHERE\_API\_KEY "tu\_key"        (Windows)
+#### Linux o macOS
 
-&#x20;      export COHERE\_API\_KEY="tu\_key"      (Linux/Mac)
+```bash
+export COHERE_API_KEY="tu_api_key"
+```
 
+También puedes utilizar un archivo `.env`:
 
+```env
+COHERE_API_KEY=tu_api_key
+```
 
-4\. (Opcional) Regenerar la base vectorial - ya viene incluida en el repo:
+> [!CAUTION]
+> Nunca publiques tu API key en GitHub. Agrega el archivo `.env` a tu `.gitignore`.
 
+### 5. Regenerar la base vectorial
 
+Este paso es opcional, ya que la base vectorial está incluida en el repositorio.
 
-&#x20;      python src/indexar\_catalogo.py
+```bash
+python src/indexar_catalogo.py
+```
 
+### 6. Ejecutar la aplicación
 
+```bash
+python -m streamlit run app.py
+```
 
-5\. Ejecutar la aplicacion:
+La aplicación estará disponible normalmente en:
 
+```text
+http://localhost:8501
+```
 
+---
 
-&#x20;      python -m streamlit run app.py
+## 💬 Ejemplos de uso
 
+### Consulta relacionada con un síntoma común
 
+**Pregunta**
 
-\## Ejemplos de preguntas y respuestas
+```text
+Me arde el estómago después de comer.
+```
 
+**Respuesta esperada**
 
+```text
+El ardor después de comer puede estar relacionado con acidez o reflujo.
 
-\*\*Pregunta:\*\* "me arde el estomago despues de comer"
+Dentro del catálogo se encuentra Riopan, cuyo principio activo es
+magaldrato con dimeticona y se presenta como gel oral en sobres.
 
-\*\*Respuesta:\*\* Entiendo que tienes ardor estomacal después de comer. En este caso, te sugiero que consideres usar Riopan. Este medicamento contiene magaldrato y dimeticona, y está disponible en gel oral en sobres. Sin embargo, es importante que sigas las instrucciones del empaque y que consultes a un profesional de la salud si los síntomas persisten o empeoran.
+Sigue las instrucciones indicadas en el empaque. Si el malestar es
+intenso, frecuente, aparece acompañado de vómito, sangrado o dificultad
+para tragar, consulta a un profesional de la salud.
+```
 
+---
 
+### Consulta con un síntoma de alerta
 
-Recuerda que es fundamental no automedicarse y buscar siempre la orientación de un médico o farmacéutico cuando se trata de la salud.
+**Pregunta**
 
+```text
+Tengo dolor de pecho.
+```
 
+**Respuesta esperada**
 
-\*\*Pregunta:\*\* "tengo dolor de pecho"
+```text
+El dolor de pecho puede ser una señal de una condición médica grave.
 
-\*\*Respuesta:\*\* El dolor de pecho puede ser un síntoma preocupante y, en algunos casos, puede indicar una condición médica grave. Es importante no automedicarse y buscar atención médica inmediata si el dolor persiste o empeora.
+No es recomendable automedicarse ni intentar tratar este síntoma con
+productos de venta libre. Busca atención médica inmediata, especialmente
+si el dolor es intenso, repentino o está acompañado de dificultad para
+respirar, sudoración, mareo, náuseas o dolor que se extiende al brazo,
+espalda o mandíbula.
+```
 
+> [!IMPORTANT]
+> Ante síntomas de alerta, FarmaKnow no debe presentar medicamentos como solución principal.
 
+---
 
-Basándome en el contexto proporcionado, te sugiero que consideres las siguientes opciones:
+### Consulta fuera del catálogo
 
+**Pregunta**
 
+```text
+¿Cuál es la capital de Francia?
+```
 
-Aspirina Bayer: Este medicamento contiene ácido acetilsalicílico y se utiliza para aliviar el dolor de cabeza y reducir la inflamación. Sin embargo, es importante tener en cuenta que la Aspirina no es recomendada para el dolor de pecho, ya que puede aumentar el riesgo de sangrado y no es adecuada para este tipo de síntomas.
+**Respuesta esperada**
 
+```text
+No encontré información relacionada con esta consulta dentro del catálogo
+de FarmaKnow.
 
+Este asistente está limitado a orientación sobre medicamentos de venta
+libre, herbolaria, vitaminas y suplementos.
+```
 
-Gaviscon Suspensión: Este medicamento contiene alginato de sodio, bicarbonato de sodio y carbonato de calcio, y se utiliza para aliviar la acidez y el dolor de pecho asociado con el reflujo gastroesofágico. Sin embargo, es importante tener en cuenta que el dolor de pecho puede ser un síntoma de una condición médica grave, como un ataque cardíaco, y no debe ser ignorado.
+---
 
+## ☁️ Despliegue
 
+La aplicación está desplegada en una instancia **AWS EC2**.
 
-Si tienes dolor de pecho, te recomiendo que consultes a un profesional de la salud lo antes posible. Es importante no automedicarse y buscar atención médica inmediata si el dolor persiste o empeora.
+### Demostración pública
 
+🔗 **http://18.206.184.187:8501**
 
+### Infraestructura
 
-\*\*Pregunta:\*\* "cual es la capital de Francia"
+| Servicio          | Configuración                               |
+| ----------------- | ------------------------------------------- |
+| Amazon EC2        | Instancia `t3.micro`.                       |
+| Sistema operativo | Amazon Linux 2023.                          |
+| Security Groups   | Reglas para SSH, HTTP, HTTPS y puerto 8501. |
+| Aplicación        | Streamlit.                                  |
 
-\*\*Respuesta:\*\* No encontre informacion sobre esto en el catalogo disponible.
+Oracle Next Education confirmó que el uso de **Oracle Cloud Infrastructure** era una sugerencia y no un requisito obligatorio, siempre que el proyecto estuviera disponible mediante una URL pública.
 
-Recomiendo consultar a un profesional de la salud para obtener una respuesta precisa sobre la capital de Francia.
+Se eligió AWS EC2 debido a la disponibilidad de recursos dentro de su capa gratuita al momento del despliegue.
 
+### Evidencia del despliegue
 
+![FarmaKnow ejecutándose en AWS EC2](docs/captura_deploy.png)
 
-\## Deploy en OCI
+---
 
+## 📁 Estructura del proyecto
 
+```text
+farmaknow/
+│
+├── app.py
+├── requirements.txt
+├── README.md
+│
+├── data/
+│   └── catalogo_medicamentos.csv
+│
+├── docs/
+│   ├── logo.png
+│   ├── captura_deploy.png
+│   └── politica_uso_alcance.md
+│
+├── src/
+│   ├── indexar_catalogo.py
+│   ├── agente.py
+│   ├── recuperacion.py
+│   └── seguridad.py
+│
+└── chroma_db/
+    └── ...
+```
 
-\## Deploy
+> La estructura puede variar de acuerdo con la versión actual del repositorio.
 
+---
 
+## 📜 Política de uso
 
-Desplegado en \*\*AWS EC2\*\* (instancia t3.micro, Amazon Linux 2023, capa gratuita).
+La política completa de uso y alcance se encuentra en:
 
+[`docs/politica_uso_alcance.md`](docs/politica_uso_alcance.md)
 
+FarmaKnow tiene fines educativos y demostrativos. La información proporcionada es únicamente orientativa y no sustituye:
 
-URL publica: http://18.206.184.187:8501
+* Una consulta médica.
+* Un diagnóstico profesional.
+* Una receta.
+* Un tratamiento indicado por personal de salud.
+* La información oficial incluida en el empaque de cada producto.
 
+---
 
+## 🚧 Estado del proyecto
 
-Nota: el programa Oracle Next Education confirmo que OCI es una sugerencia y no
+Actualmente, FarmaKnow se encuentra en fase de desarrollo y demostración académica.
 
-un requisito obligatorio, siempre que el proyecto quede accesible mediante una
+Posibles mejoras futuras:
 
-URL publica. Se opto por AWS EC2 por mayor disponibilidad de recursos en la
+* Incorporar filtros por edad y condiciones especiales.
+* Mejorar el sistema de clasificación de síntomas de alerta.
+* Agregar pruebas automáticas para las reglas de seguridad.
+* Implementar historial local de consultas.
+* Añadir evaluación de calidad de recuperación.
+* Mejorar la experiencia móvil.
+* Implementar HTTPS y un dominio personalizado.
 
-capa gratuita al momento del despliegue.
+---
 
+## 👨‍💻 Autor
 
+**Jorge Armando Godínez Avilés**
 
-Servicios utilizados:
+Proyecto desarrollado como parte del programa **Oracle Next Education, ONE**, en colaboración con **Alura Latam**.
 
-\- Amazon EC2 (computo, instancia t3.micro)
+[![GitHub](https://img.shields.io/badge/GitHub-jgodinezaviles-181717?style=for-the-badge\&logo=github)](https://github.com/jgodinezaviles)
 
-\- Security Groups (firewall: SSH, HTTP, HTTPS, puerto 8501 para Streamlit)
+---
 
+<div align="center">
 
-Puedes encontrar la captura de la ejecucion en la nube en:
-docs/captura_deploy.png
+### FarmaKnow
 
+**Información responsable, respuestas fundamentadas y seguridad antes que automedicación.**
 
+⭐ Si este proyecto te resulta interesante, puedes marcar el repositorio con una estrella.
 
-\## Politica de uso
-
-
-
-Ver docs/politica\_uso\_alcance.md. FarmaKnow es un proyecto educativo; la informacion
-
-es orientativa y no sustituye la valoracion de un profesional de la salud.
-
+</div>
