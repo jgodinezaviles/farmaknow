@@ -603,48 +603,47 @@ http://18.206.184.187:8501
 
 ---
 
-## Ejemplos de comportamiento
+## Ejemplos de preguntas y respuestas
 
-### Síntoma común
+### Consulta sobre ardor estomacal
 
-```text
-Me arde el estómago después de comer.
-```
+> **Pregunta:** "me arde el estomago despues de comer"
 
-Comportamiento esperado:
+**Respuesta:**
 
-* Recuperar opciones relacionadas con acidez o reflujo.
-* Mencionar únicamente productos presentes en el catálogo.
-* Mostrar principio activo, presentación y contraindicaciones.
-* Remitir a las instrucciones del empaque.
-* Recomendar consulta profesional si el malestar persiste o empeora.
+Entiendo que tienes ardor estomacal después de comer. En este caso, te sugiero que consideres usar Riopan. Este medicamento contiene magaldrato y dimeticona, y está disponible en gel oral en sobres. Sin embargo, es importante que sigas las instrucciones del empaque y que consultes a un profesional de la salud si los síntomas persisten o empeoran.
 
-### Posible emergencia
+Recuerda que es fundamental no automedicarse y buscar siempre la orientación de un médico o farmacéutico cuando se trata de la salud.
 
-```text
-Tengo dolor de pecho.
-```
+---
 
-Comportamiento esperado:
+### Consulta sobre dolor de pecho
 
-* Mostrar una alerta visible.
-* Priorizar atención médica inmediata.
-* No presentar un medicamento como solución principal.
-* Evitar dosis o instrucciones de automedicación.
+> **Pregunta:** "tengo dolor de pecho"
 
-### Consulta fuera de alcance
+**Respuesta:**
 
-```text
-¿Cuál es la capital de Francia?
-```
+El dolor de pecho puede ser un síntoma preocupante y, en algunos casos, puede indicar una condición médica grave. Es importante no automedicarse y buscar atención médica inmediata si el dolor persiste o empeora.
 
-Comportamiento esperado:
+Basándome en el contexto proporcionado, te sugiero que consideres las siguientes opciones:
 
-```text
-No encontré información sobre esto en el catálogo disponible.
-```
+**Aspirina Bayer:** Este medicamento contiene ácido acetilsalicílico y se utiliza para aliviar el dolor de cabeza y reducir la inflamación. Sin embargo, es importante tener en cuenta que la Aspirina no es recomendada para el dolor de pecho, ya que puede aumentar el riesgo de sangrado y no es adecuada para este tipo de síntomas.
 
-El agente debe explicar que FarmaKnow está limitado a orientación sobre medicamentos OTC, herbolaria, vitaminas y suplementos.
+**Gaviscon Suspensión:** Este medicamento contiene alginato de sodio, bicarbonato de sodio y carbonato de calcio, y se utiliza para aliviar la acidez y el dolor de pecho asociado con el reflujo gastroesofágico. Sin embargo, es importante tener en cuenta que el dolor de pecho puede ser un síntoma de una condición médica grave, como un ataque cardíaco, y no debe ser ignorado.
+
+Si tienes dolor de pecho, te recomiendo que consultes a un profesional de la salud lo antes posible. Es importante no automedicarse y buscar atención médica inmediata si el dolor persiste o empeora.
+
+---
+
+### Consulta fuera del catálogo
+
+> **Pregunta:** "cual es la capital de Francia"
+
+**Respuesta:**
+
+No encontre informacion sobre esto en el catalogo disponible.
+
+Recomiendo consultar a un profesional de la salud para obtener una respuesta precisa sobre la capital de Francia.
 
 ---
 
