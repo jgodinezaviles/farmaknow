@@ -1,143 +1,194 @@
 <div align="center">
 
-<img src="docs/logo.png" alt="FarmaKnow" width="180">
+<img src="assets/farmaknow.png" alt="Logotipo de FarmaKnow" width="700">
 
-# 💊 FarmaKnow
+### Asistente inteligente para orientación sobre medicamentos de venta libre en México
 
-### Asistente inteligente para la orientación sobre medicamentos de venta libre en México
+<p>
+FarmaKnow combina búsqueda semántica, generación aumentada por recuperación y reglas de seguridad para consultar un catálogo curado de medicamentos OTC, productos herbolarios, vitaminas y suplementos.
+</p>
 
-[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge\&logo=python\&logoColor=white)](https://www.python.org/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?style=for-the-badge\&logo=streamlit\&logoColor=white)](https://streamlit.io/)
-[![Cohere](https://img.shields.io/badge/Cohere-AI-39594D?style=for-the-badge)](https://cohere.com/)
-[![ChromaDB](https://img.shields.io/badge/ChromaDB-Vector_DB-7B61FF?style=for-the-badge)](https://www.trychroma.com/)
+[![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge\&logo=python\&logoColor=white)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Interfaz-FF4B4B?style=for-the-badge\&logo=streamlit\&logoColor=white)](https://streamlit.io/)
+[![Cohere](https://img.shields.io/badge/Cohere-IA%20Generativa-39594D?style=for-the-badge)](https://cohere.com/)
+[![ChromaDB](https://img.shields.io/badge/ChromaDB-Base%20Vectorial-5C4EE5?style=for-the-badge)](https://www.trychroma.com/)
 [![AWS](https://img.shields.io/badge/AWS-EC2-FF9900?style=for-the-badge\&logo=amazonwebservices\&logoColor=white)](https://aws.amazon.com/ec2/)
+
+<br>
+
+[![Abrir demostración](https://img.shields.io/badge/ABRIR_DEMOSTRACIÓN-00A8E8?style=for-the-badge\&logo=streamlit\&logoColor=white)](http://18.206.184.187:8501)
+[![Ver repositorio](https://img.shields.io/badge/VER_REPOSITORIO-181717?style=for-the-badge\&logo=github\&logoColor=white)](https://github.com/jgodinezaviles/farmaknow)
+[![Reportar problema](https://img.shields.io/badge/REPORTAR_PROBLEMA-24292F?style=for-the-badge\&logo=github\&logoColor=white)](https://github.com/jgodinezaviles/farmaknow/issues)
+
+<br>
 
 Proyecto desarrollado para el challenge **Alura Agente** del programa
 **Oracle Next Education, ONE**.
-
-[Ver demostración](http://18.206.184.187:8501) · [Reportar un problema](https://github.com/jgodinezaviles/farmaknow/issues)
 
 </div>
 
 ---
 
-## 📑 Contenido
+## Contenido
 
-* [Descripción](#-descripción)
-* [Características principales](#-características-principales)
-* [Seguridad y alcance](#-seguridad-y-alcance)
-* [Arquitectura](#-arquitectura)
-* [Tecnologías](#-tecnologías)
-* [Catálogo de conocimiento](#-catálogo-de-conocimiento)
-* [Instalación local](#-instalación-local)
-* [Ejemplos de uso](#-ejemplos-de-uso)
-* [Despliegue](#-despliegue)
-* [Estructura del proyecto](#-estructura-del-proyecto)
-* [Política de uso](#-política-de-uso)
+* [Descripción](#descripción)
+* [Demostración](#demostración)
+* [Funciones principales](#funciones-principales)
+* [Resumen técnico](#resumen-técnico)
+* [Arquitectura](#arquitectura)
+* [Seguridad y alcance](#seguridad-y-alcance)
+* [Catálogo de conocimiento](#catálogo-de-conocimiento)
+* [Tecnologías](#tecnologías)
+* [Instalación local](#instalación-local)
+* [Pruebas y utilidades](#pruebas-y-utilidades)
+* [Estructura del repositorio](#estructura-del-repositorio)
+* [Despliegue](#despliegue)
+* [Ejemplos de comportamiento](#ejemplos-de-comportamiento)
+* [Limitaciones actuales](#limitaciones-actuales)
+* [Mejoras futuras](#mejoras-futuras)
+* [Política de uso](#política-de-uso)
+* [Autor](#autor)
 
 ---
 
-## 🔎 Descripción
+## Descripción
 
-**FarmaKnow** es un agente de inteligencia artificial basado en una arquitectura **RAG**, Retrieval-Augmented Generation, diseñado para orientar a las personas sobre opciones de venta libre relacionadas con síntomas comunes.
+**FarmaKnow** es un agente de inteligencia artificial diseñado para orientar sobre medicamentos de venta libre, también conocidos como **OTC**, productos herbolarios, vitaminas y suplementos disponibles en México.
 
-El usuario puede describir su malestar mediante una consulta guiada o escribiendo libremente. El sistema analiza la solicitud, busca información relevante dentro de un catálogo curado y genera una respuesta basada exclusivamente en los registros recuperados.
+La aplicación permite consultar el catálogo de dos maneras:
 
-El catálogo contiene **161 registros** de:
+1. **Consulta guiada:** el usuario selecciona una categoría y uno o varios síntomas.
+2. **Chat libre:** el usuario describe su malestar utilizando sus propias palabras.
 
-* Medicamentos de venta libre, OTC.
-* Productos de herbolaria.
-* Vitaminas.
-* Suplementos alimenticios.
+La consulta se convierte en un embedding multilingüe y se compara con una base vectorial local. Después, los fragmentos más relevantes del catálogo se incorporan al prompt enviado al modelo generativo.
 
-Cada respuesta puede incluir:
+La respuesta se construye únicamente con el contexto recuperado y puede incluir:
 
 * Nombre comercial.
 * Principio activo.
 * Presentación.
+* Clasificación de venta.
 * Contraindicaciones relevantes.
 * Advertencias de seguridad.
-* Recomendación de consulta profesional.
+* Productos del catálogo utilizados como fuente.
 
 > [!IMPORTANT]
-> FarmaKnow es un proyecto educativo y no sustituye el diagnóstico, tratamiento ni valoración de un médico o profesional de la salud.
+> FarmaKnow es un proyecto educativo. No diagnostica enfermedades, no prescribe tratamientos y no sustituye una consulta con un médico, farmacéutico o profesional de la salud.
 
 ---
 
-## ✨ Características principales
+## Demostración
 
-| Función                     | Descripción                                                                                           |
-| --------------------------- | ----------------------------------------------------------------------------------------------------- |
-| 🧭 Consulta guiada          | Permite seleccionar síntomas mediante una interfaz estructurada.                                      |
-| 💬 Chat libre               | Interpreta preguntas escritas en lenguaje natural.                                                    |
-| 🧠 Búsqueda semántica       | Recupera información relacionada aunque la consulta no utilice exactamente las palabras del catálogo. |
-| 📚 Respuestas fundamentadas | Genera respuestas utilizando únicamente el contenido recuperado.                                      |
-| 🚨 Detección de alertas     | Identifica síntomas que podrían requerir atención médica inmediata.                                   |
-| 🔗 Fuentes visibles         | Muestra los productos y registros utilizados para construir la respuesta.                             |
-| 🛑 Control de alucinaciones | Indica cuando no existe información suficiente, en lugar de inventarla.                               |
+La aplicación está disponible públicamente en:
 
----
+### [Abrir FarmaKnow](http://18.206.184.187:8501)
 
-## 🛡️ Seguridad y alcance
+<div align="center">
 
-FarmaKnow fue diseñado con reglas específicas para reducir respuestas potencialmente peligrosas.
+<img src="docs/captura_deploy.png" alt="FarmaKnow desplegado en AWS EC2" width="950">
 
-### El agente nunca debe
+</div>
 
-* Recomendar medicamentos de venta con receta.
-* Proporcionar dosis específicas.
-* Diagnosticar enfermedades.
-* Sustituir la valoración de un profesional.
-* Inventar productos o información ausente del catálogo.
-
-### Detección de síntomas de alerta
-
-Los registros pueden incluir el campo `advertencia_seria`.
-
-Cuando la consulta contiene síntomas como:
-
-* Dolor de pecho.
-* Dificultad para respirar.
-* Sangrado abundante.
-* Pérdida del conocimiento.
-* Reacción alérgica grave.
-* Dolor intenso o repentino.
-
-El agente debe priorizar la recomendación de **atención médica inmediata** y evitar sugerir productos de automedicación.
-
-> [!WARNING]
-> Ante una posible emergencia, se debe contactar a los servicios de emergencia o acudir inmediatamente a una unidad médica.
+> [!NOTE]
+> La demostración actual utiliza una dirección IP y una conexión HTTP sobre el puerto `8501`. El navegador puede mostrarla como una conexión no segura.
 
 ---
 
-## 🏗️ Arquitectura
+## Funciones principales
+
+| Función                    | Descripción                                                                                                      |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| **Consulta guiada**        | Organiza los síntomas en cinco grupos y permite seleccionar varios mediante controles visuales.                  |
+| **Chat libre**             | Permite escribir una consulta en lenguaje natural y conserva el historial durante la sesión actual de Streamlit. |
+| **Búsqueda semántica**     | Recupera registros relacionados aunque la consulta no coincida de forma literal con el texto del catálogo.       |
+| **RAG**                    | Envía al modelo únicamente los fragmentos recuperados junto con reglas de respuesta y seguridad.                 |
+| **Detección de alertas**   | Revisa el campo `advertencia_seria` de los resultados recuperados.                                               |
+| **Fuentes visibles**       | Presenta los nombres de los productos del catálogo utilizados para responder.                                    |
+| **Control de alcance**     | Indica cuando la información solicitada no se encuentra dentro del catálogo.                                     |
+| **Interfaz personalizada** | Utiliza Streamlit, tema oscuro, navegación mediante imágenes y estilos CSS propios.                              |
+
+### Modos de consulta
+
+<table>
+<tr>
+<td align="center" width="33%">
+<img src="assets/consultaguiada.png" alt="Consulta guiada" width="150"><br>
+<strong>Consulta guiada</strong><br>
+Selección de categoría y síntomas.
+</td>
+<td align="center" width="33%">
+<img src="assets/chatlibre.png" alt="Chat libre" width="150"><br>
+<strong>Chat libre</strong><br>
+Consulta escrita en lenguaje natural.
+</td>
+<td align="center" width="33%">
+<img src="assets/acercade.png" alt="Acerca de" width="150"><br>
+<strong>Acerca de</strong><br>
+Información sobre alcance y tecnología.
+</td>
+</tr>
+</table>
+
+---
+
+## Resumen técnico
+
+| Elemento                            | Implementación actual     |
+| ----------------------------------- | ------------------------- |
+| Registros del catálogo              | `161`                     |
+| Documentos en la base vectorial     | `162`                     |
+| Grupos de síntomas                  | `5`                       |
+| Colección de ChromaDB               | `medicamentos_otc`        |
+| Resultados recuperados por consulta | `Top 4`                   |
+| Modelo de embeddings                | `embed-multilingual-v3.0` |
+| Modelo generativo                   | `command-r7b-12-2024`     |
+| Temperatura del modelo              | `0.3`                     |
+| Interfaz                            | Streamlit                 |
+| Persistencia vectorial              | ChromaDB local            |
+| Despliegue actual                   | AWS EC2                   |
+
+Los **162 documentos vectorizados** corresponden a:
+
+* 161 registros del catálogo.
+* 1 documento con la política de uso y alcance.
+
+---
+
+## Arquitectura
 
 ```mermaid
 flowchart TD
     A[Usuario] --> B[Interfaz Streamlit]
 
-    B --> C{Tipo de consulta}
-    C -->|Consulta guiada| D[Construcción de pregunta]
-    C -->|Chat libre| D
+    B --> C{Modo de consulta}
+    C -->|Consulta guiada| D[Categoría y síntomas]
+    C -->|Chat libre| E[Texto en lenguaje natural]
 
-    D --> E[Embedding de la consulta]
-    E --> F[Cohere embed-multilingual-v3.0]
+    D --> F[Consulta normalizada]
+    E --> F
 
-    F --> G[ChromaDB]
-    G --> H[Recuperación de los 4 chunks más relevantes]
+    F --> G[Embedding de consulta]
+    G --> H[Cohere embed-multilingual-v3.0]
 
-    H --> I[Productos y metadatos]
-    I --> J[Prompt con reglas de seguridad]
+    H --> I[ChromaDB]
+    I --> J[Top 4 documentos]
+    J --> K[Chunks y metadatos]
 
-    J --> K[Cohere command-r7b-12-2024]
-    K --> L[Respuesta fundamentada]
+    K --> L[Prompt RAG]
+    M[Reglas de seguridad] --> L
+    N[Política de uso] --> L
 
-    L --> M{¿Existe una alerta?}
-    M -->|Sí| N[Recomendación de atención médica]
-    M -->|No| O[Orientación sobre opciones OTC]
+    L --> O[Cohere command-r7b-12-2024]
+    O --> P[Respuesta generada]
 
-    N --> P[Respuesta, alerta y fuentes]
-    O --> P
+    K --> Q{advertencia_seria = SI}
+    Q -->|Sí| R[Mostrar alerta médica]
+    Q -->|No| S[Mostrar orientación OTC]
+
+    P --> T[Respuesta final]
+    R --> T
+    S --> T
+    T --> U[Fuentes del catálogo]
 ```
 
 ### Flujo de recuperación
@@ -146,84 +197,196 @@ flowchart TD
 Consulta del usuario
         │
         ▼
-Embedding multilingüe
+Embedding con Cohere
         │
         ▼
-Búsqueda semántica en ChromaDB
+Consulta semántica en ChromaDB
         │
         ▼
-Top 4 fragmentos relevantes
+Recuperación de los 4 resultados más cercanos
         │
         ▼
-Prompt con contexto y reglas de seguridad
+Contexto + metadatos + reglas de seguridad
         │
         ▼
 Generación de respuesta con Cohere
         │
         ▼
-Respuesta, bandera de alerta y fuentes
+Respuesta + alerta + fuentes consultadas
 ```
 
-La base vectorial contiene **162 chunks**:
+### Indexación
 
-* 161 registros del catálogo.
-* 1 documento con la política de uso y alcance.
+Durante la indexación, cada fila del CSV se transforma en un texto narrativo que contiene:
+
+```text
+Síntoma
+Categoría
+Nombre comercial
+Principio activo
+Presentación
+Clasificación de venta
+Contraindicaciones
+Nivel de alerta
+Fuente
+```
+
+Los documentos se convierten en embeddings con:
+
+```python
+model="embed-multilingual-v3.0"
+input_type="search_document"
+```
+
+Las consultas utilizan el mismo modelo, pero con:
+
+```python
+input_type="search_query"
+```
 
 ---
 
-## 🧰 Tecnologías
+## Seguridad y alcance
 
-| Tecnología    | Uso dentro del proyecto                                |
-| ------------- | ------------------------------------------------------ |
-| **Python**    | Lógica principal del agente y procesamiento de datos.  |
-| **Cohere**    | Generación de embeddings multilingües y respuestas.    |
-| **ChromaDB**  | Almacenamiento y búsqueda dentro de la base vectorial. |
-| **Pandas**    | Limpieza, validación y procesamiento del catálogo.     |
-| **Streamlit** | Desarrollo de la interfaz web interactiva.             |
-| **AWS EC2**   | Alojamiento de la aplicación en la nube.               |
-| **GitHub**    | Control de versiones y documentación del proyecto.     |
+FarmaKnow incluye reglas explícitas dentro del prompt del sistema para reducir respuestas fuera de alcance o potencialmente peligrosas.
+
+### El agente debe
+
+* Responder únicamente con la información recuperada del catálogo.
+* Mantener un tono breve, claro y empático.
+* Mencionar nombre comercial, principio activo, presentación y contraindicaciones cuando sugiera un producto.
+* Recomendar consultar a un profesional de la salud.
+* Informar cuando no encuentre datos relevantes en el catálogo.
+* Priorizar una alerta médica cuando los resultados recuperados contienen `advertencia_seria: SI`.
+
+### El agente no debe
+
+* Diagnosticar enfermedades.
+* Recomendar medicamentos que requieren receta.
+* Inventar productos o información ausente del catálogo.
+* Indicar dosis, cantidades o frecuencias específicas.
+* Sustituir la valoración de un profesional.
+* Evaluar de forma completa interacciones entre varios medicamentos.
+* Presentar un producto como solución principal ante un posible síntoma de emergencia.
+
+### Detección de alertas
+
+La implementación actual revisa los metadatos de los cuatro documentos recuperados:
+
+```python
+hay_alerta = any(
+    metadata.get("advertencia_seria") == "SI"
+    for metadata in metadatas
+)
+```
+
+Cuando se detecta una alerta, la interfaz muestra un mensaje destacado recomendando atención médica inmediata.
+
+Algunos ejemplos de situaciones marcadas en el catálogo son:
+
+* Dolor de pecho.
+* Dificultad para respirar.
+* Tos con sangre.
+* Sangrado gastrointestinal.
+* Desmayo o confusión.
+* Dolor súbito e intenso.
+* Fiebre alta persistente.
+* Signos de deshidratación severa.
+
+> [!WARNING]
+> En una emergencia real se debe contactar a los servicios de emergencia o acudir inmediatamente a una unidad médica. No se debe depender de FarmaKnow para tomar decisiones urgentes.
+
+> [!CAUTION]
+> Las consultas se envían a Cohere para generar embeddings y respuestas. No introduzcas nombres completos, direcciones, expedientes clínicos ni otros datos personales sensibles.
 
 ---
 
-## 📚 Catálogo de conocimiento
+## Catálogo de conocimiento
 
-El catálogo fue construido utilizando información de referencia relacionada con productos de venta libre, herbolaria y suplementos disponibles en México.
+El catálogo principal se encuentra en:
 
-Entre las fuentes consultadas se encuentran:
+```text
+docs/catalogo_unificado.csv
+```
+
+Contiene las siguientes columnas:
+
+```text
+grupo
+categoria_normalizada
+sintoma
+categoria
+principio_activo
+nombre_comercial
+presentacion
+clasificacion_venta
+contraindicaciones_clave
+advertencia_seria
+fuente
+```
+
+### Grupos incluidos
+
+| Identificador interno      | Nombre mostrado en la interfaz |
+| -------------------------- | ------------------------------ |
+| `dolor_fiebre_inflamacion` | Dolor y fiebre                 |
+| `respiratorio_gripe`       | Gripe y alergias               |
+| `digestivo`                | Digestivo                      |
+| `dermatologico_topico`     | Piel                           |
+| `herbolaria_vitaminas`     | Herbolaria y vitaminas         |
+
+### Fuentes citadas en los registros
+
+Los registros del catálogo incluyen referencias como:
 
 * COFEPRIS.
 * PLM.
 * Cuadro Básico y Catálogo de Medicamentos.
 * Consejo de Salubridad General.
-* NOM-086-SSA1.
 * Farmacopea Herbolaria de los Estados Unidos Mexicanos.
+* Información de fabricantes y distribuidores.
+* Etiquetado comercial y referencias farmacológicas.
 
-Cada registro puede contener campos como:
+> [!NOTE]
+> FarmaKnow no consulta fuentes médicas en tiempo real. Trabaja con el catálogo estático incluido en el repositorio y con la política de uso indexada.
+
+---
+
+## Tecnologías
+
+| Tecnología     | Uso                                                                   |
+| -------------- | --------------------------------------------------------------------- |
+| **Python**     | Lógica del agente, procesamiento de datos e integración de servicios. |
+| **Streamlit**  | Interfaz web, navegación, chat y selección guiada.                    |
+| **Cohere**     | Embeddings multilingües y generación de respuestas.                   |
+| **ChromaDB**   | Almacenamiento persistente y recuperación semántica.                  |
+| **Pandas**     | Lectura y transformación del catálogo CSV.                            |
+| **HTML y CSS** | Personalización visual de la interfaz de Streamlit.                   |
+| **AWS EC2**    | Alojamiento de la demostración pública.                               |
+| **GitHub**     | Control de versiones y documentación.                                 |
+
+### Dependencias del proyecto
+
+El archivo `requirements.txt` contiene:
 
 ```text
-síntoma
-categoría
-principio activo
-nombre comercial
-presentación
-clasificación de venta
-contraindicaciones clave
-advertencia seria
-fuente
+streamlit
+cohere
+chromadb
+pandas
 ```
 
 ---
 
-## ⚙️ Instalación local
+## Instalación local
 
 ### Requisitos
 
-Antes de comenzar, asegúrate de contar con:
-
-* Python 3.10 o superior.
+* Python 3.10 o superior recomendado.
 * Git.
+* `pip`.
 * Una API key de Cohere.
-* `pip` actualizado.
+* Conexión a internet para utilizar la API de Cohere.
 
 ### 1. Clonar el repositorio
 
@@ -234,11 +397,18 @@ cd farmaknow
 
 ### 2. Crear un entorno virtual
 
-#### Windows
+#### Windows PowerShell
 
-```bash
+```powershell
 python -m venv venv
-venv\Scripts\activate
+.\venv\Scripts\Activate.ps1
+```
+
+#### Windows CMD
+
+```bat
+python -m venv venv
+venv\Scripts\activate.bat
 ```
 
 #### Linux o macOS
@@ -251,20 +421,25 @@ source venv/bin/activate
 ### 3. Instalar las dependencias
 
 ```bash
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
 ### 4. Configurar la API key de Cohere
 
-Obtén una API key desde el panel de Cohere.
-
-#### Windows PowerShell
+#### Windows PowerShell, sesión actual
 
 ```powershell
+$env:COHERE_API_KEY="tu_api_key"
+```
+
+#### Windows, variable persistente
+
+```bat
 setx COHERE_API_KEY "tu_api_key"
 ```
 
-Después de ejecutar el comando, abre una nueva terminal.
+Después de utilizar `setx`, abre una nueva terminal.
 
 #### Linux o macOS
 
@@ -272,30 +447,30 @@ Después de ejecutar el comando, abre una nueva terminal.
 export COHERE_API_KEY="tu_api_key"
 ```
 
-También puedes utilizar un archivo `.env`:
+Puedes comprobar que la variable existe con:
 
-```env
-COHERE_API_KEY=tu_api_key
+#### PowerShell
+
+```powershell
+echo $env:COHERE_API_KEY
+```
+
+#### Linux o macOS
+
+```bash
+echo $COHERE_API_KEY
 ```
 
 > [!CAUTION]
-> Nunca publiques tu API key en GitHub. Agrega el archivo `.env` a tu `.gitignore`.
+> Nunca subas tu API key a GitHub. El repositorio ya ignora `.env` y `.streamlit/secrets.toml`, pero el código actual obtiene la clave directamente desde la variable de entorno `COHERE_API_KEY`.
 
-### 5. Regenerar la base vectorial
-
-Este paso es opcional, ya que la base vectorial está incluida en el repositorio.
-
-```bash
-python src/indexar_catalogo.py
-```
-
-### 6. Ejecutar la aplicación
+### 5. Ejecutar la aplicación
 
 ```bash
 python -m streamlit run app.py
 ```
 
-La aplicación estará disponible normalmente en:
+Streamlit abrirá la aplicación normalmente en:
 
 ```text
 http://localhost:8501
@@ -303,182 +478,246 @@ http://localhost:8501
 
 ---
 
-## 💬 Ejemplos de uso
+## Pruebas y utilidades
 
-### Consulta relacionada con un síntoma común
+### Regenerar la base vectorial
 
-**Pregunta**
+El repositorio ya incluye la base de ChromaDB. Solo necesitas regenerarla cuando modifiques el catálogo o la política de uso.
+
+```bash
+python src/indexar_catalogo.py
+```
+
+El script:
+
+1. Lee `docs/catalogo_unificado.csv`.
+2. Convierte cada fila en un documento narrativo.
+3. Agrega `docs/politica_uso_alcance.md`.
+4. Genera embeddings con Cohere.
+5. Elimina la colección anterior si existe.
+6. Crea nuevamente la colección `medicamentos_otc`.
+7. Guarda la base en `chroma_db/`.
+
+> [!WARNING]
+> Regenerar la base elimina y vuelve a crear la colección local. También consume solicitudes de la API de Cohere.
+
+### Probar la búsqueda semántica
+
+```bash
+python src/probar_busqueda.py
+```
+
+Este archivo realiza una consulta de prueba, recupera tres resultados y muestra sus documentos y metadatos en la terminal.
+
+### Ejecutar la versión de consola
+
+```bash
+python src/agente.py
+```
+
+`agente.py` contiene una versión de prueba por terminal. La interfaz web principal importa y utiliza `src/rag.py`.
+
+---
+
+## Estructura del repositorio
+
+```text
+farmaknow/
+│
+├── .streamlit/
+│   └── config.toml
+│
+├── assets/
+│   ├── acercade.png
+│   ├── chatlibre.png
+│   ├── consultaguiada.png
+│   ├── farmaknow.png
+│   └── home.png
+│
+├── chroma_db/
+│   ├── 9a01e07e-aa84-46b7-bf87-f3efbf445b03/
+│   └── chroma.sqlite3
+│
+├── docs/
+│   ├── captura_deploy.png
+│   ├── catalogo_unificado.csv
+│   ├── digestivo.txt
+│   ├── dolor_fiebre_inflamacion.txt
+│   ├── gripe_resfriadocomun_tos.txt
+│   ├── herbolaria.txt
+│   ├── politica_uso_alcance.md
+│   └── topico_dermatologico.txt
+│
+├── src/
+│   ├── agente.py
+│   ├── indexar_catalogo.py
+│   ├── probar_busqueda.py
+│   └── rag.py
+│
+├── .gitignore
+├── app.py
+├── README.md
+└── requirements.txt
+```
+
+### Archivos principales
+
+| Archivo                        | Función                                                                                               |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------- |
+| `app.py`                       | Interfaz completa de Streamlit, navegación, consulta guiada, chat libre y presentación de resultados. |
+| `src/rag.py`                   | Recuperación semántica, prompt de seguridad, llamada al modelo y detección de alertas.                |
+| `src/indexar_catalogo.py`      | Construcción y regeneración de la base vectorial.                                                     |
+| `src/probar_busqueda.py`       | Prueba directa de recuperación semántica.                                                             |
+| `src/agente.py`                | Variante del agente para uso y pruebas desde terminal.                                                |
+| `docs/catalogo_unificado.csv`  | Fuente estructurada principal del catálogo.                                                           |
+| `docs/politica_uso_alcance.md` | Reglas y limitaciones que también se agregan a la base vectorial.                                     |
+| `.streamlit/config.toml`       | Tema oscuro de la aplicación.                                                                         |
+| `assets/`                      | Logotipo, botón de inicio e iconos de navegación.                                                     |
+
+Los archivos `.txt` de `docs/` funcionan como material de apoyo y organización del contenido. La indexación actual utiliza directamente el CSV unificado y el documento de política.
+
+---
+
+## Despliegue
+
+La demostración está alojada en una instancia **AWS EC2**.
+
+| Componente        | Configuración actual                 |
+| ----------------- | ------------------------------------ |
+| Proveedor         | Amazon Web Services                  |
+| Servicio          | EC2                                  |
+| Instancia         | `t3.micro`                           |
+| Sistema operativo | Amazon Linux 2023                    |
+| Aplicación        | Streamlit                            |
+| Puerto público    | `8501`                               |
+| Base vectorial    | ChromaDB persistente en la instancia |
+| API externa       | Cohere                               |
+
+Los Security Groups permiten el acceso necesario para administración y ejecución de la aplicación, incluyendo el puerto de Streamlit.
+
+### URL pública
+
+```text
+http://18.206.184.187:8501
+```
+
+---
+
+## Ejemplos de comportamiento
+
+### Síntoma común
 
 ```text
 Me arde el estómago después de comer.
 ```
 
-**Respuesta esperada**
+Comportamiento esperado:
 
-```text
-El ardor después de comer puede estar relacionado con acidez o reflujo.
+* Recuperar opciones relacionadas con acidez o reflujo.
+* Mencionar únicamente productos presentes en el catálogo.
+* Mostrar principio activo, presentación y contraindicaciones.
+* Remitir a las instrucciones del empaque.
+* Recomendar consulta profesional si el malestar persiste o empeora.
 
-Dentro del catálogo se encuentra Riopan, cuyo principio activo es
-magaldrato con dimeticona y se presenta como gel oral en sobres.
-
-Sigue las instrucciones indicadas en el empaque. Si el malestar es
-intenso, frecuente, aparece acompañado de vómito, sangrado o dificultad
-para tragar, consulta a un profesional de la salud.
-```
-
----
-
-### Consulta con un síntoma de alerta
-
-**Pregunta**
+### Posible emergencia
 
 ```text
 Tengo dolor de pecho.
 ```
 
-**Respuesta esperada**
+Comportamiento esperado:
 
-```text
-El dolor de pecho puede ser una señal de una condición médica grave.
+* Mostrar una alerta visible.
+* Priorizar atención médica inmediata.
+* No presentar un medicamento como solución principal.
+* Evitar dosis o instrucciones de automedicación.
 
-No es recomendable automedicarse ni intentar tratar este síntoma con
-productos de venta libre. Busca atención médica inmediata, especialmente
-si el dolor es intenso, repentino o está acompañado de dificultad para
-respirar, sudoración, mareo, náuseas o dolor que se extiende al brazo,
-espalda o mandíbula.
-```
-
-> [!IMPORTANT]
-> Ante síntomas de alerta, FarmaKnow no debe presentar medicamentos como solución principal.
-
----
-
-### Consulta fuera del catálogo
-
-**Pregunta**
+### Consulta fuera de alcance
 
 ```text
 ¿Cuál es la capital de Francia?
 ```
 
-**Respuesta esperada**
+Comportamiento esperado:
 
 ```text
-No encontré información relacionada con esta consulta dentro del catálogo
-de FarmaKnow.
-
-Este asistente está limitado a orientación sobre medicamentos de venta
-libre, herbolaria, vitaminas y suplementos.
+No encontré información sobre esto en el catálogo disponible.
 ```
 
----
-
-## ☁️ Despliegue
-
-La aplicación está desplegada en una instancia **AWS EC2**.
-
-### Demostración pública
-
-🔗 **http://18.206.184.187:8501**
-
-### Infraestructura
-
-| Servicio          | Configuración                               |
-| ----------------- | ------------------------------------------- |
-| Amazon EC2        | Instancia `t3.micro`.                       |
-| Sistema operativo | Amazon Linux 2023.                          |
-| Security Groups   | Reglas para SSH, HTTP, HTTPS y puerto 8501. |
-| Aplicación        | Streamlit.                                  |
-
-Oracle Next Education confirmó que el uso de **Oracle Cloud Infrastructure** era una sugerencia y no un requisito obligatorio, siempre que el proyecto estuviera disponible mediante una URL pública.
-
-Se eligió AWS EC2 debido a la disponibilidad de recursos dentro de su capa gratuita al momento del despliegue.
-
-### Evidencia del despliegue
-
-![FarmaKnow ejecutándose en AWS EC2](docs/captura_deploy.png)
+El agente debe explicar que FarmaKnow está limitado a orientación sobre medicamentos OTC, herbolaria, vitaminas y suplementos.
 
 ---
 
-## 📁 Estructura del proyecto
+## Limitaciones actuales
 
-```text
-farmaknow/
-│
-├── app.py
-├── requirements.txt
-├── README.md
-│
-├── data/
-│   └── catalogo_medicamentos.csv
-│
-├── docs/
-│   ├── logo.png
-│   ├── captura_deploy.png
-│   └── politica_uso_alcance.md
-│
-├── src/
-│   ├── indexar_catalogo.py
-│   ├── agente.py
-│   ├── recuperacion.py
-│   └── seguridad.py
-│
-└── chroma_db/
-    └── ...
-```
-
-> La estructura puede variar de acuerdo con la versión actual del repositorio.
+* El catálogo es estático y debe actualizarse manualmente.
+* La aplicación no consulta registros sanitarios ni disponibilidad de productos en tiempo real.
+* No verifica la edad, peso, embarazo, enfermedades previas o medicamentos actuales del usuario.
+* No realiza una evaluación clínica ni una revisión completa de interacciones.
+* La recuperación utiliza los cuatro resultados más cercanos sin una etapa adicional de reranking.
+* La alerta se activa cuando cualquiera de los resultados recuperados contiene `advertencia_seria: SI`.
+* Un resultado de alerta semánticamente cercano, pero no exactamente aplicable, podría producir una advertencia conservadora.
+* El historial del chat vive únicamente en `st.session_state` y no se conserva de forma permanente.
+* Las respuestas pueden variar porque son generadas por un modelo de lenguaje.
+* La demostración pública actual utiliza HTTP y no cuenta con dominio personalizado.
+* Las versiones de las dependencias no están fijadas en `requirements.txt`.
 
 ---
 
-## 📜 Política de uso
+## Mejoras futuras
 
-La política completa de uso y alcance se encuentra en:
+* Separar la detección de emergencias del mecanismo de recuperación semántica.
+* Agregar un clasificador específico de síntomas de alerta.
+* Incorporar umbrales mínimos de similitud y reranking.
+* Crear pruebas unitarias y evaluaciones automáticas para consultas seguras y fuera de alcance.
+* Fijar versiones de dependencias para mejorar la reproducibilidad.
+* Añadir manejo de errores para la API, la variable de entorno y la base vectorial.
+* Mejorar la visualización de fuentes y contraindicaciones.
+* Agregar métricas de calidad de recuperación.
+* Implementar HTTPS y un dominio personalizado.
+* Optimizar la experiencia en dispositivos móviles.
+* Incorporar una política de privacidad visible dentro de la interfaz.
+* Agregar filtros opcionales de edad y condiciones especiales, sin convertir la herramienta en un sistema de diagnóstico.
+
+---
+
+## Política de uso
+
+La política completa está disponible en:
 
 [`docs/politica_uso_alcance.md`](docs/politica_uso_alcance.md)
 
-FarmaKnow tiene fines educativos y demostrativos. La información proporcionada es únicamente orientativa y no sustituye:
+FarmaKnow tiene fines educativos y demostrativos. La información generada no sustituye:
 
 * Una consulta médica.
 * Un diagnóstico profesional.
 * Una receta.
 * Un tratamiento indicado por personal de salud.
-* La información oficial incluida en el empaque de cada producto.
+* La información oficial del empaque.
+* La atención de los servicios de emergencia.
 
 ---
 
-## 🚧 Estado del proyecto
+## Autor
 
-Actualmente, FarmaKnow se encuentra en fase de desarrollo y demostración académica.
+<div align="center">
 
-Posibles mejoras futuras:
+### Jorge Armando Godínez Avilés
 
-* Incorporar filtros por edad y condiciones especiales.
-* Mejorar el sistema de clasificación de síntomas de alerta.
-* Agregar pruebas automáticas para las reglas de seguridad.
-* Implementar historial local de consultas.
-* Añadir evaluación de calidad de recuperación.
-* Mejorar la experiencia móvil.
-* Implementar HTTPS y un dominio personalizado.
+Proyecto desarrollado como parte de **Oracle Next Education, ONE**, en colaboración con **Alura Latam**.
 
----
+[![GitHub](https://img.shields.io/badge/GitHub-jgodinezaviles-181717?style=for-the-badge\&logo=github\&logoColor=white)](https://github.com/jgodinezaviles)
 
-## 👨‍💻 Autor
-
-**Jorge Armando Godínez Avilés**
-
-Proyecto desarrollado como parte del programa **Oracle Next Education, ONE**, en colaboración con **Alura Latam**.
-
-[![GitHub](https://img.shields.io/badge/GitHub-jgodinezaviles-181717?style=for-the-badge\&logo=github)](https://github.com/jgodinezaviles)
+</div>
 
 ---
 
 <div align="center">
 
-### FarmaKnow
+<img src="assets/home.png" alt="Icono de FarmaKnow" width="70">
 
-**Información responsable, respuestas fundamentadas y seguridad antes que automedicación.**
+### Información responsable, respuestas fundamentadas y seguridad antes que automedicación.
 
-⭐ Si este proyecto te resulta interesante, puedes marcar el repositorio con una estrella.
+Si el proyecto te resulta interesante, puedes marcar el repositorio con una estrella.
 
 </div>
