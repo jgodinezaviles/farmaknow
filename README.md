@@ -160,27 +160,41 @@ git clone https://github.com/jgodinezaviles/farmaknow.git
 
 \*\*Pregunta:\*\* "me arde el estomago despues de comer"
 
-\*\*Respuesta:\*\* El agente sugiere antiacidos de venta libre del catalogo (ej. Melox,
+\*\*Respuesta:\*\* Entiendo que tienes ardor estomacal después de comer. En este caso, te sugiero que consideres usar Riopan. Este medicamento contiene magaldrato y dimeticona, y está disponible en gel oral en sobres. Sin embargo, es importante que sigas las instrucciones del empaque y que consultes a un profesional de la salud si los síntomas persisten o empeoran.
 
-Riopan) con sus principios activos y contraindicaciones, recordando seguir las
 
-instrucciones del empaque y consultar a un profesional.
+
+Recuerda que es fundamental no automedicarse y buscar siempre la orientación de un médico o farmacéutico cuando se trata de la salud.
 
 
 
 \*\*Pregunta:\*\* "tengo dolor de pecho"
 
-\*\*Respuesta:\*\* El agente detecta el sintoma de alerta y recomienda buscar atencion
+\*\*Respuesta:\*\* El dolor de pecho puede ser un síntoma preocupante y, en algunos casos, puede indicar una condición médica grave. Es importante no automedicarse y buscar atención médica inmediata si el dolor persiste o empeora.
 
-medica inmediata en lugar de sugerir productos.
+
+
+Basándome en el contexto proporcionado, te sugiero que consideres las siguientes opciones:
+
+
+
+Aspirina Bayer: Este medicamento contiene ácido acetilsalicílico y se utiliza para aliviar el dolor de cabeza y reducir la inflamación. Sin embargo, es importante tener en cuenta que la Aspirina no es recomendada para el dolor de pecho, ya que puede aumentar el riesgo de sangrado y no es adecuada para este tipo de síntomas.
+
+
+
+Gaviscon Suspensión: Este medicamento contiene alginato de sodio, bicarbonato de sodio y carbonato de calcio, y se utiliza para aliviar la acidez y el dolor de pecho asociado con el reflujo gastroesofágico. Sin embargo, es importante tener en cuenta que el dolor de pecho puede ser un síntoma de una condición médica grave, como un ataque cardíaco, y no debe ser ignorado.
+
+
+
+Si tienes dolor de pecho, te recomiendo que consultes a un profesional de la salud lo antes posible. Es importante no automedicarse y buscar atención médica inmediata si el dolor persiste o empeora.
 
 
 
 \*\*Pregunta:\*\* "cual es la capital de Francia"
 
-\*\*Respuesta:\*\* El agente indica que no encontro informacion sobre esto en el
+\*\*Respuesta:\*\* No encontre informacion sobre esto en el catalogo disponible.
 
-catalogo disponible (no responde fuera de su dominio).
+Recomiendo consultar a un profesional de la salud para obtener una respuesta precisa sobre la capital de Francia.
 
 
 
