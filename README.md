@@ -92,7 +92,7 @@ Caracteristicas de seguridad:
 
 \- \*\*Streamlit\*\* - interfaz web
 
-\- \*\*Oracle Cloud Infrastructure (OCI)\*\* - deploy
+\- \*\*AWS EC2\*\* - deploy en la nube
 
 
 
@@ -188,7 +188,37 @@ catalogo disponible (no responde fuera de su dominio).
 
 
 
-\[PENDIENTE: capturas/video de la ejecucion en la nube]
+\## Deploy
+
+
+
+Desplegado en \*\*AWS EC2\*\* (instancia t3.micro, Amazon Linux 2023, capa gratuita).
+
+
+
+URL publica: http://18.206.184.187:8501
+
+
+
+Nota: el programa Oracle Next Education confirmo que OCI es una sugerencia y no
+
+un requisito obligatorio, siempre que el proyecto quede accesible mediante una
+
+URL publica. Se opto por AWS EC2 por mayor disponibilidad de recursos en la
+
+capa gratuita al momento del despliegue.
+
+
+
+Servicios utilizados:
+
+\- Amazon EC2 (computo, instancia t3.micro)
+
+\- Security Groups (firewall: SSH, HTTP, HTTPS, puerto 8501 para Streamlit)
+
+
+
+!\[FarmaKnow en ejecucion](docs/captura\_deploy.png)
 
 
 
