@@ -711,6 +711,48 @@ Proyecto desarrollado como parte de **Oracle Next Education, ONE**, en colaborac
 
 ---
 
+## Historial del proyecto
+
+Recorrido cronológico del desarrollo, con las decisiones, obstáculos y cambios de rumbo que dieron forma al proyecto en su estado actual.
+
+<div align="center">
+
+| #  | Hito | Descripción |
+| :- | :--- | :---------- |
+| 01 | 🎯 Elección del dominio | Del ejemplo genérico de RH corporativo, se decidió aterrizar el challenge en un caso real y útil: medicamentos de venta libre en México. |
+| 02 | 📚 Investigación de fuentes | Mapeo de referencias oficiales: COFEPRIS, PLM, Cuadro Básico del CSG, NOM-086-SSA1 y Farmacopea Herbolaria. |
+| 03 | 📝 Generación del catálogo | Redacción de cinco prompts especializados para producir subcatálogos temáticos con la misma estructura de columnas. |
+| 04 | 🔗 Unificación y normalización | Consolidación de los cinco archivos en un solo CSV de 161 registros, con categorías normalizadas para filtrado por metadatos. |
+| 05 | 🛡️ Política de uso | Redacción de un documento propio de alcance, límites y disclaimers, indexado como parte del RAG. |
+| 06 | 🔄 Cambio de proveedor LLM | Se planeó usar Claude para la generación, pero se optó por Cohere para evitar depender de saldo en una cuenta de pago y garantizar disponibilidad continua. |
+| 07 | 🧠 Embeddings y vectorización | Generación de embeddings multilingües con `embed-multilingual-v3.0` sobre representaciones narrativas de cada fila. |
+| 08 | 🗂️ Base vectorial local | Persistencia con ChromaDB bajo la colección `medicamentos_otc`, incluida directamente en el repositorio. |
+| 09 | 🔍 Recuperación semántica | Validación en consola de que la búsqueda encontraba resultados relevantes incluso con sinónimos y frases coloquiales. |
+| 10 | ⚙️ Prompt de sistema | Definición de las ocho reglas de seguridad que rigen el comportamiento del agente. |
+| 11 | 🚨 Detección de alertas | Aprovechamiento del campo `advertencia_seria` como capa de seguridad prioritaria sobre cualquier sugerencia de producto. |
+| 12 | 🔁 Ajuste de modelo generativo | Migración de `command-r` a `command-r7b-12-2024` tras el retiro del modelo original por parte de Cohere. |
+| 13 | 🖥️ Interfaz Streamlit | Construcción de la aplicación con consulta guiada, chat libre y sección "Acerca de". |
+| 14 | 🎨 Identidad visual | Aplicación de tema oscuro, tipografía Roboto, logotipo propio e iconos de navegación. |
+| 15 | 🧭 Navegación por imágenes | Reemplazo de pestañas por un menú principal con iconos clicables, con botón de regreso al inicio en cada sección. |
+| 16 | 📦 Preparación para publicación | Creación de `requirements.txt`, `.gitignore` y organización final del repositorio. |
+| 17 | 🐙 Publicación en GitHub | Repositorio público con historial de commits y corrección de autoría al detectar una identidad de Git incorrecta. |
+| 18 | ☁️ Cambio de plataforma de despliegue | Se planeó desplegar en Oracle Cloud Infrastructure, pero la falta persistente de capacidad en el free tier motivó la migración a AWS EC2, tras confirmar con el programa que la nube era libre. |
+| 19 | 🛠️ Configuración de AWS EC2 | Instancia `t3.micro` con Amazon Linux 2023, apertura del puerto 8501 y conexión por SSH. |
+| 20 | 🐛 Depuración de despliegue | Corrección de un BOM en `config.toml` que rompía el parser de Streamlit al ejecutarse en Linux. |
+| 21 | 🔁 Servicio persistente con systemd | Migración de `nohup` a un servicio con `Restart=always` y `EnvironmentFile` para sobrevivir a reinicios de la VM. |
+| 22 | 📖 Documentación final | Redacción del README completo con arquitectura, ejemplos reales, limitaciones y evidencia visual. |
+| 23 | 🚀 Entrega del challenge | Envío del proyecto al programa Oracle Next Education / Alura Latam. |
+
+</div>
+
+<div align="center">
+
+<sub>Del catálogo al agente, del agente a la nube.</sub>
+
+</div>
+
+---
+
 <div align="center">
 
 <img src="assets/home.png" alt="Icono de FarmaKnow" width="70">
